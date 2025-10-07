@@ -1,0 +1,17 @@
+services:
+  db:
+    image: postgres:latest
+    restart: unless-stopped
+    ports:
+      - ${EXPERTSCRUD_DATABASE_PORT:-5432}:5432
+    environment:
+      POSTGRES_USER: ${EXPERTSCRUD_DATABASE_USER}
+      POSTGRES_PASSWORD: ${EXPERTSCRUD_DATABASE_PASSWORD}
+      POSTGRES_DB: ${EXPERTSCRUD_DATABASE_NAME}
+      PGDATA: /data/pg
+    volumes:
+      - /data/pg:/data/pg
+
+volumes:
+  db:
+    driver: local
